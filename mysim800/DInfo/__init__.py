@@ -1,1 +1,1 @@
-from mysim800.DInfo.info import Cinfo
+from mysim800.DInfo.iNfo import Class_Info

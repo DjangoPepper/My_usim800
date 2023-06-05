@@ -1,5 +1,5 @@
 
-from mysim800.Communicate_serial import communicate
+from mysim800.cOmmunicate_serial import Class_Communicate
 
 def _try_decode_utf16_encoded_string(s):
     # Check if the input string is a valid UTF-16 hex string. If it is, decode it. Otherwise, return it as-is. 
@@ -65,7 +65,7 @@ def _parse_cmgl_response(cmgl_response_str):
     return result_dict
  
 
-class Csms(communicate):
+class Class_Sms(Class_Communicate):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 

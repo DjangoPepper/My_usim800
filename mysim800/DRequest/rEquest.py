@@ -1,10 +1,10 @@
-from mysim800.DParser.ATParser import CParser
+from mysim800.DParser.aTParser import Class_Parser
 import time
-from mysim800.Communicate_serial import Ccommunicate
-from mysim800.DParser import CJsonParser
+from mysim800.cOmmunicate_serial import Class_Communicate
+from mysim800.DParser import Class_JsonParser
 
 
-class Crequest(Ccommunicate):
+class Class_Request(Class_Communicate):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -76,18 +76,18 @@ class Crequest(Ccommunicate):
         self._send_cmd(cmd, get_decode_data=True)
         data = self._getdata(
             data_to_decode=[], string_to_decode=None, till=b'\n', count=2, counter=0)
-        tk = Parser(data)
+        tk = Class_Parser(data)
         token = tk.tokenizer()
         self._content = tk.parser
         if (len(token) == 4):
             self._status_code = token[2]
             read_bytes = token[3]
             string = self._read_sent_data(int(read_bytes)+1000)
-            tk = Parser(string)
+            tk = Class_Parser(string)
 
             self._content = tk.bytesparser
             self._text = tk.parser
-            jph = JsonParser.ATJSONObjectParser(string)
+            jph = Class_JsonParser.ATJSONObjectParser(string)
             self._json = jph.JSONObject
         cmd = "AT +SAPBR=0,1"
         self._send_cmd(cmd)
@@ -119,17 +119,17 @@ class Crequest(Ccommunicate):
         self._send_cmd(cmd, get_decode_data=True)
         data = self._getdata(
             data_to_decode=[], string_to_decode=None, till=b'\n', count=2, counter=0)
-        tk = Parser(data)
+        tk = Class_Parser(data)
         self._content = tk.parser
         token = tk.tokenizer()
         if (len(token) == 4):
             self._status_code = token[2]
             read_bytes = token[3]
             string = self._read_sent_data(int(read_bytes)+1000)
-            tk = Parser(string)
+            tk = Class_Parser(string)
             self._content = tk.bytesparser
             self._text = tk.parser
-            jph = JsonParser.ATJSONObjectParser(string)
+            jph = Class_JsonParser.ATJSONObjectParser(string)
             self._json = jph.JSONObject
         cmd = "AT +SAPBR=0,1"
         self._send_cmd(cmd)

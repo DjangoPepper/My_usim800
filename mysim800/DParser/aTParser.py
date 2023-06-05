@@ -1,16 +1,16 @@
 import queue
-from . import stack
+from . import sTack
 import time
 
 
-class CParser:
+class Class_Parser:
 
     def __init__(self, text, *args, **kwargs):
         self.tokens = []
         self._parser = self.Parser(text)
         self._bytesparser = self.BytesParser(text)
         self.processText = "".join(text.decode().split()) + "$"
-        self.stack = stack.Stack()
+        self.stack = sTack.Stack()
         self.queue = queue.Queue()
         self.separator = ["+", ":", " ", ",", "$"]
 

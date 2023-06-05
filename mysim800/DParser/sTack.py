@@ -1,4 +1,4 @@
-class CStack:
+class Class_Stack:
     def __init__(self):
         self.items = []
 

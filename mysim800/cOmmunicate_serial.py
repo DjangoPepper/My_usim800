@@ -3,7 +3,7 @@ import time
 import re
 import json
 
-class Ccommunicate:
+class Class_Communicate:
     cmd_list = []
 
     def __init__(self, port):

@@ -1,10 +1,10 @@
-from mysim800.DParser.ATParser import CParser
+from mysim800.DParser.aTParser import Class_Parser
 import time
-from mysim800.Communicate_serial import Ccommunicate
-from mysim800.DParser import CJsonParser
+from mysim800.cOmmunicate_serial import Class_Communicate
+from mysim800.DParser import Class_JsonParser
 
 
-class info(communicate):
+class Class_Info(Class_Communicate):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

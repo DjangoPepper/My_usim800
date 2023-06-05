@@ -1,7 +1,7 @@
 from json import JSONDecoder
 
 
-class CATJSONObjectParser:
+class Class_ATJSONObjectParser:
     def __init__(self, text, *args, **kwargs):
         self.text = text.decode()
         self._JSONObjectPresent = False

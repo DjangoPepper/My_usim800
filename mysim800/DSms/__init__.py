@@ -1,1 +1,1 @@
-from mysim800.DSms.sms import Csms
+from mysim800.DSms.sMs import Class_Sms
