@@ -15,9 +15,10 @@ Quick start :
 ### Import
 
 ``` {.sourceCode .python}
->>> from usim800 import sim800
+>>> from mysim800.uSim800 import Class_Sim800
+
 >>> import json
->>> gsm = sim800(baudrate=9600,path="/dev/ttyUSB3")
+>>> gsm = sim800(baudrate=9600,path="/dev/ttyS0")
 ```
 ### set APN
 
