@@ -290,7 +290,9 @@ class Class_Record(Class_Communicate):
 		self._data_record_stats = None
 		self._list_record_stats = None
 		self._space_record_stats = None
-		self._space_record_stats = None
+		self._status_record_stats = None
+		self._mode_record_stats = None
+		self._size_record_stats = None
 
 	#1
 	def start_record(self,id,form) -> str:
@@ -442,3 +444,60 @@ class Class_Record(Class_Communicate):
 		return _space_record_stats
 
 	#b
+	def status_record(self) -> str:
+		cmd = "AT+CREC?"
+		data = self._send_cmd(
+			cmd,
+			return_data=True,
+			t=1,
+			printio=True,
+			get_decode_data=False
+			)	
+		try:
+			_status_record_stats  = (data.decode().split()[-1])
+			if "OK" in _status_record_stats :
+				_status_record_stats  = True
+		except:
+			_status_record_stats  = False
+		return _status_record_stats
+	
+	#c
+	def mode_record(self,mode) -> str:
+		cmd = "AT+DTAM={}".format(mode)
+		data = self._send_cmd(
+			cmd,
+			return_data=True,
+			t=1,
+			printio=True,
+			get_decode_data=False
+			)	
+		try:
+			_status_record_stats  = (data.decode().split()[-1])
+			if "OK" in _status_record_stats :
+				_status_record_stats  = True
+		except:
+			_status_record_stats  = False
+		return _status_record_stats
+
+	#d
+	def size_record(self,id) -> str:
+		cmd = "AT+CREC=7,{}".format(id)
+		data = self._send_cmd(
+			cmd,
+			return_data=True,
+			t=1,
+			printio=True,
+			get_decode_data=False
+			)	
+		try:
+			_size_record_stats  = (data.decode().split(": ")[1]).split(",")[2]
+		except :
+			_size_record_stats = 0
+		
+		#if _size_record_stats > 0 :
+		# 	# _size_record_stats  = True
+		# 	_size_record_stats = 0
+		# else :
+		# 	_status_record_stats  = False
+
+		return _size_record_stats
