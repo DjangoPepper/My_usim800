@@ -1,5 +1,5 @@
 
-from mysim800.cOmmunicate_serial import Class_Communicate
+from mysim800.DCommunication.cOmmunicate_serial import Class_Communicate
 
 def _try_decode_utf16_encoded_string(s):
     # Check if the input string is a valid UTF-16 hex string. If it is, decode it. Otherwise, return it as-is. 

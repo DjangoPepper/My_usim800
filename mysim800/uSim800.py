@@ -1,8 +1,8 @@
 # from ATRequests import requests
-from mysim800.DSms import Class_Sms
-from mysim800.cOmmunicate_serial import  Class_Communicate
-from mysim800.DRequest import Class_Request
-from mysim800.DInfo import Class_Info
+from mysim800.DSms.sMs import Class_Sms
+from mysim800.DCommunication.cOmmunicate_serial import Class_Communicate
+from mysim800.DRequest.rEquest import Class_Request
+from mysim800.DInfo.iNfo import Class_Info
 import serial
 
 class Class_Sim800(Class_Communicate):

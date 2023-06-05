@@ -11,8 +11,8 @@ class Class_Communicate:
 
     def _setcmd(self, cmd, end='\r\n'):
         end = '\r\n'
-
         return (cmd + end)
+
     def _readtill(self,till="OK"):
         rcv = self._port.read(14816)
         rcvd = rcv.decode()
@@ -20,6 +20,7 @@ class Class_Communicate:
             rcvd += rcv.decode()
             rcv = self._port.read(14816)
         return rcvd
+    
     def _ATcmd(self):
         self._port.write(self._setcmd("AT").encode())
         rcv = self._port.read(14816)
@@ -43,22 +44,28 @@ class Class_Communicate:
 
     def _read_sent_data(self, numberOfBytes):
         rcv = self._port.read(numberOfBytes)
-
         return rcv
 
     def _bearer(self,APN):
         self._ATcmd()
+        
         cmd = "AT +SAPBR=0,1"
         self._send_cmd(cmd)
+        
         self._ATcmd()
+        
         cmd = 'AT + SAPBR=3,1,"CONTYPE","GPRS"'
         self._send_cmd(cmd)
+        
         cmd = 'AT + SAPBR=3,1,"APN","{}"'.format(APN)
         self._send_cmd(cmd)
+        
         cmd = "AT + SAPBR=1,1"
         self._send_cmd(cmd)
+        
         cmd = "AT + SAPBR=2,1"
         data = self._send_cmd(cmd,return_data=True)
+        
         try :
            IP = data.decode().split()[4].split(",")[-1].replace('"','')
         except:
