@@ -1,7 +1,7 @@
 from mysim800.DParser.aTParser import Class_Parser
 import time
 from mysim800.cOmmunicate_serial import Class_Communicate
-from mysim800.DParser import Class_JsonParser
+from mysim800.DParser.jSonParser import Class_ATJSONObjectParser
 
 
 class Class_Request(Class_Communicate):
@@ -87,7 +87,7 @@ class Class_Request(Class_Communicate):
 
             self._content = tk.bytesparser
             self._text = tk.parser
-            jph = Class_JsonParser.ATJSONObjectParser(string)
+            jph = Class_ATJSONObjectParser.ATJSONObjectParser(string)
             self._json = jph.JSONObject
         cmd = "AT +SAPBR=0,1"
         self._send_cmd(cmd)
@@ -129,7 +129,7 @@ class Class_Request(Class_Communicate):
             tk = Class_Parser(string)
             self._content = tk.bytesparser
             self._text = tk.parser
-            jph = Class_JsonParser.ATJSONObjectParser(string)
+            jph = Class_ATJSONObjectParser.ATJSONObjectParser(string)
             self._json = jph.JSONObject
         cmd = "AT +SAPBR=0,1"
         self._send_cmd(cmd)
