@@ -4,27 +4,10 @@ usim800
 [![image](https://img.shields.io/github/license/Bhagyarsh/usim800.svg)](https://pypi.org/project/usim800/)
 [![image](https://img.shields.io/pypi/v/usim800.svg)](https://pypi.org/project/usim800/)
 
-usim800 is a Python driver module for SIM800 GSM/GPRS . Its has easy-to-use api to access GPRS and to send sms . 
+from usim800 Python driver module for SIM800 socket . 
+Its has easy-to-use api to access GPRS.
+Changes made to clarify directoriess, files, classes names for my personnal use and undertstanding.
 
-Support
-------------
-* raspberry pi
-* Tested on python 3 with orange pi zero and linux machine using (usb to ttl) .
-
-Features
-------------
-    
-Send Get and post requests(supports HTTP/1.1).
-
-requests API  similar to pythons [Requests](https://github.com/kennethreitz/requests) module.
-
-Send SMS
-   
-    
-
-Installation
-------------
-    > pip install usim800
 
 
 Quick start :
@@ -72,4 +55,3 @@ True
 Future Plan and  improvements
 ------------
 * better error handling
-* read sms
