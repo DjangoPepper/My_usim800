@@ -4,7 +4,8 @@ usim800
 [![image](https://img.shields.io/github/license/Bhagyarsh/usim800.svg)](https://pypi.org/project/usim800/)
 [![image](https://img.shields.io/pypi/v/usim800.svg)](https://pypi.org/project/usim800/)
 
-usim800 is a Python driver module for SIM800 GSM/GPRS . Its has easy-to-use api to access GPRS and to send sms . 
+from usim800 Python driver module for SIM800 GSM/GPRS . Its has easy-to-use api to access GPRS and to send sms.
+changes made to clarify directorys, filse, class names for my personnal use and undertstanding.
 
 Support
 ------------
