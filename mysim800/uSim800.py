@@ -4,6 +4,10 @@ from mysim800.DCommunication.cOmmunicate_serial import Class_Communicate
 from mysim800.DRequest.rEquest import Class_Request
 from mysim800.DInfo.iNfo import Class_Info
 from mysim800.DRecord.rEcord import Class_Record
+from mysim800.DTools.tOols import Class_Tools
+
+
+
 import serial
 
 class Class_Sim800(Class_Communicate):
@@ -16,4 +20,5 @@ class Class_Sim800(Class_Communicate):
         self.info = Class_Info(self.port)
         self.sms = Class_Sms(self.port)
         self.record = Class_Record(self.port)
-
+        self.tools = Class_Tools(self.port)
+        

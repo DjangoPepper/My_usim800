@@ -37,7 +37,10 @@ class Class_Communicate:
                 rcv = None
 
             if printio:
-                print(rcv.decode())
+                try :
+                    print(rcv.decode())
+                except:
+                    print('rcv Nothing to print')
             
             if return_data:
                 return rcv
