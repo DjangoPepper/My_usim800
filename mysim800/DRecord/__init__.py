@@ -1,1 +1,1 @@
-from mysim800.Drecord.rEcord import Class_Record
+from mysim800.DRecord.rEcord import Class_Record
