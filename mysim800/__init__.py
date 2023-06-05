@@ -1,1 +1,1 @@
-from mysim800.usim800 import Csim800
+from mysim800.uSim800 import Class_Sim800
