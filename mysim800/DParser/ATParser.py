@@ -3,7 +3,7 @@ from . import stack
 import time
 
 
-class Parser:
+class CParser:
 
     def __init__(self, text, *args, **kwargs):
         self.tokens = []

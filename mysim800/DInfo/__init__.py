@@ -1,0 +1,1 @@
+from mysim800.DInfo.info import Cinfo

@@ -1,11 +1,11 @@
 # from ATRequests import requests
-from usim800.Sms import sms
-from usim800.Communicate import  communicate
-from usim800.Request import request
-from usim800.Info import info
+from mysim800.DSms import Csms
+from mysim800.Communicate_serial import  Ccommunicate
+from mysim800.DRequest import request
+from mysim800.DInfo import info
 import serial
 
-class sim800(communicate):
+class Csim800(communicate):
     TIMMEOUT = 1
 
     def __init__(self, baudrate, path):

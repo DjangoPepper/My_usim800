@@ -1,10 +1,10 @@
-from usim800.Parser.ATParser import Parser
+from mysim800.DParser.ATParser import CParser
 import time
-from usim800.Communicate import communicate
-from usim800.Parser import JsonParser
+from mysim800.Communicate_serial import Ccommunicate
+from mysim800.DParser import CJsonParser
 
 
-class request(communicate):
+class Crequest(Ccommunicate):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
