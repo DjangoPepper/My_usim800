@@ -40,7 +40,7 @@ class Class_Communicate:
                 try :
                     print(rcv.decode())
                 except:
-                    print('rcv Nothing to print')
+                    print("rcv Nothing to print")
             
             if return_data:
                 return rcv
@@ -75,7 +75,12 @@ class Class_Communicate:
             IP = None
         return IP
 
-    def _getdata(self, data_to_decode=[], string_to_decode=None, till=b'\n', count=2, counter=0):
+    def _getdata(self, data_to_decode=[], 
+                 string_to_decode=None, 
+                 till=b'\n', 
+                 count=2, 
+                 counter=0
+                 ):
 
         rcv = self._port.read(1)
 
