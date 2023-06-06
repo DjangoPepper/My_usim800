@@ -1,5 +1,5 @@
 from mysim800.DParser.aTParser import Class_Parser
-import time
+# import time
 from mysim800.DCommunication.cOmmunicate_serial import Class_Communicate
 from mysim800.DParser.jSonParser import Class_ATJSONObjectParser
 

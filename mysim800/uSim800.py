@@ -22,4 +22,4 @@ class Class_Sim800(Class_Communicate):
         self.sms = Class_Sms(self.port)
         self.record = Class_Record(self.port)
         self.tools = Class_Tools(self.port)
-        self.sql = Class_MySql(self.port)
+        self.sql = Class_MySql()

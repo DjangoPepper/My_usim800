@@ -1,14 +1,19 @@
 import mysql.connector
-MYSQL_CONNECT_PARAMS = {
-  'user': 'root', #racine
-  'password': 'pepper',#mylittledog
-  'host': '127.0.0.1',#localip
-  'database': 'stem_db',#jobets_db
-  'raise_on_warnings': True
-}
 
-class Class_MySql(object):
-	def get_appelant(userid):
+MYSQL_CONNECT_PARAMS = {
+	'user': 'root', 		#racine
+	'password': 'pepper',	#mylittledog
+	'host': '127.0.0.1',	#localip
+	'database': 'stem_db',	#jobets_db
+	'raise_on_warnings': True
+	}
+
+class Class_MySql:
+	# def __init__(self, userid):
+	# 	self.userid = userid
+		
+
+	def get_appelant(self,userid):
 		request = "SELECT code FROM identité WHERE id={}".format(userid)
 		with mysql.connector.connect(**MYSQL_CONNECT_PARAMS) as db :
 			with db.cursor() as c:
@@ -22,7 +27,7 @@ class Class_MySql(object):
 						
 
 					APPELANT_SRV = APPELANT_SRV[0]
-					print("{} can call server".format(APPELANT_SRV))
+					# print("{} can call server".format(APPELANT_SRV))
 					LIST_OF_DIGIT = [int(x) for x in str(APPELANT_SRV)]
 					# print("Singing DTMF")
 					DTMF_MSG =('1,"' + \

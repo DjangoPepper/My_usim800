@@ -14,16 +14,16 @@ class Class_Communicate:
         return (cmd + end)
 
     def _readtill(self,till="OK"):
-        rcv = self._port.read(14816)
-        rcvd = rcv.decode()
-        while "OK" not in rcvd: 
-            rcvd += rcv.decode()
-            rcv = self._port.read(14816)
-        return rcvd
+        v_RCV = self._port.read(14816)
+        v_RCVD = v_RCV.decode()
+        while "OK" not in v_RCVD: 
+            v_RCVD += v_RCV.decode()
+            v_RCV = self._port.read(14816)
+        return v_RCVD
     
     def _ATcmd(self):
         self._port.write(self._setcmd("AT").encode())
-        rcv = self._port.read(14816)
+        v_RCV = self._port.read(14816)
 
     def _send_cmd(self, cmd, t=1, bytes=14816, return_data=False, 
                 printio=False, get_decode_data=False,read=True):
@@ -32,22 +32,22 @@ class Class_Communicate:
         if read:
             time.sleep(t)
             if not get_decode_data:
-                rcv = self._port.read(bytes)
+                v_RCV = self._port.read(bytes)
             else:
-                rcv = None
+                v_RCV = None
 
             if printio:
                 try :
-                    print(rcv.decode())
+                    print(v_RCV.decode())
                 except:
-                    print("rcv Nothing to print")
+                    print("v_RCV Nothing to print")
             
             if return_data:
-                return rcv
+                return v_RCV
 
     def _read_sent_data(self, numberOfBytes):
-        rcv = self._port.read(numberOfBytes)
-        return rcv
+        v_RCV = self._port.read(numberOfBytes)
+        return v_RCV
 
     def _bearer(self,APN):
         self._ATcmd()
@@ -82,16 +82,16 @@ class Class_Communicate:
                  counter=0
                  ):
 
-        rcv = self._port.read(1)
+        v_RCV = self._port.read(1)
 
-        if rcv == till:
+        if v_RCV == till:
             counter += 1
             if counter == count:
-                data_to_decode.append(rcv)
+                data_to_decode.append(v_RCV)
                 return b"".join(data_to_decode)
             else:
-                data_to_decode.append(rcv)
+                data_to_decode.append(v_RCV)
                 return self._getdata(data_to_decode, string_to_decode, till, count, counter)
         else:
-            data_to_decode.append(rcv)
+            data_to_decode.append(v_RCV)
             return self._getdata(data_to_decode, string_to_decode, till, count, counter)
