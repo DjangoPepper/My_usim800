@@ -194,7 +194,7 @@ class Class_Record(Class_Communicate):
 		return _status_record_stats
 	
 	#c
-	def mode_record(self,mode):
+	def set_mode_record(self,mode):
 		cmd = "AT+DTAM={}".format(mode)
 		data = self._send_cmd(
 			cmd,
@@ -204,12 +204,12 @@ class Class_Record(Class_Communicate):
 			get_decode_data=False
 			)	
 		try:
-			_status_record_stats  = (data.decode().split()[-1])
-			if "OK" in _status_record_stats :
-				_status_record_stats  = True
+			_mode_record_stats  = (data.decode().split()[-1])
+			if "OK" in _mode_record_stats :
+				_mode_record_stats  = True
 		except:
-			_status_record_stats  = False
-		return _status_record_stats
+			_mode_record_stats  = False
+		return _mode_record_stats
 
 	#d
 	def size_record(self,id):

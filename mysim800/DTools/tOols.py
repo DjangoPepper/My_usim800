@@ -10,13 +10,16 @@ class Class_Tools(Class_Communicate):
 
 	
 	def init(self):
-		self._chkcallin_stats = None
-		self._dtmf_stats = None
-		self._vtd_stats = None
-		self._recog_stats = None
-		self._cmee_stats = None
-		self._getsim_stats = None
-		self._setsim_stats = None
+		self._CHK_CALLIN_STATUS = None
+		self._DTMF_STATUS = None
+		self._VTD_STATUS = None
+		self._RECOG_STATUS = None
+		self._CMEE_STATUS = None
+		self._GETSIM_STATUS = None
+		self._SETSIM_STATUS = None
+		self.byte_encoding = "ISO-8859-1"
+		self.select_line = 2
+		self.select_word = None
 		
 	def CreateSoundAMR(_APPELANT_SRV):
 		FILENAME = str(_APPELANT_SRV) + "_" + str(datetime.datetime.now().strftime('%Y-%m-%d_%H%M%S')) + ".amr"
@@ -37,14 +40,8 @@ class Class_Tools(Class_Communicate):
 			t -= 1
 
 	def check_callinprogress(self): #default FLAGS ARE FALSE
-		cmd = "AT+CLCC"
-		data = self._send_cmd(
-			cmd,
-			return_data=True,
-			t=1,
-			printio=True,
-			get_decode_data=False
-			)	
+		cmd = "AT+CLCC?"
+		data = self._send_cmd(cmd, return_data=True, t=1, printio=True, get_decode_data=False )	
 		
 		try:
 			data = (data.decode().split()[-1])
@@ -53,11 +50,11 @@ class Class_Tools(Class_Communicate):
 			# try:
 				bidir = (data.decode().split()[1]).split(": ")[1].split(",")[0]
 				state = (data.decode().split()[1]).split(": ")[1].split(",")[2]
-				_chkcallin_stats = True
+				_CHK_CALLIN_STATUS = True
 		except:
 				bidir = 9
 				state = 9
-				_chkcallin_stats = False
+				_CHK_CALLIN_STATUS = False
 		# else : 
 		# 	return False
 
@@ -66,7 +63,7 @@ class Class_Tools(Class_Communicate):
 		# 		_status_record_stats  = True
 		# except:
 		# 	_status_record_stats  = False
-		return _chkcallin_stats
+		return _CHK_CALLIN_STATUS
 
 	def send_dtmf_code(self, recipient_dtmf):
 		
@@ -83,12 +80,12 @@ class Class_Tools(Class_Communicate):
 			)
 		# data = (data.decode().split()[-1])		
 		try:
-			_dtmf_stats = (data.decode().split()[-1])
-			if "OK" in _dtmf_stats:
-				_dtmf_stats = True
+			_DTMF_STATUS = (data.decode().split()[-1])
+			if "OK" in _DTMF_STATUS:
+				_DTMF_STATUS = True
 		except:
-			_dtmf_stats = False
-		return _dtmf_stats
+			_DTMF_STATUS = False
+		return _DTMF_STATUS
 	
 	def set_vtd(self, value):
 		#AT+VTD=10 1sec
@@ -103,12 +100,12 @@ class Class_Tools(Class_Communicate):
 			)
 		# data = (data.decode().split()[-1])		
 		try:
-			_vtd_stats = (data.decode().split()[-1])
-			if "OK" in _vtd_stats:
-				_vtd_stats = True
+			_VTD_STATUS = (data.decode().split()[-1])
+			if "OK" in _VTD_STATUS:
+				_VTD_STATUS = True
 		except:
-			_vtd_stats = False
-		return _vtd_stats
+			_VTD_STATUS = False
+		return _VTD_STATUS
 
 	def set_recog(self, value):
 		cmd = ("AT+COLP={}".format(value))
@@ -121,12 +118,12 @@ class Class_Tools(Class_Communicate):
 			)
 		# data = (data.decode().split()[-1])		
 		try:
-			_recog_stats = (data.decode().split()[-1])
-			if "OK" in _recog_stats:
-				_recog_stats = True
+			_RECOG_STATUS = (data.decode().split()[-1])
+			if "OK" in _RECOG_STATUS:
+				_RECOG_STATUS = True
 		except:
-			_recog_stats = False
-		return _recog_stats
+			_RECOG_STATUS = False
+		return _RECOG_STATUS
 	
 	def set_cmee(self, value):
 		cmd = ("AT+CMEE={}".format(value))
@@ -139,12 +136,12 @@ class Class_Tools(Class_Communicate):
 			)
 		# data = (data.decode().split()[-1])		
 		try:
-			_cmee_stats = (data.decode().split()[-1])
-			if "OK" in _cmee_stats:
-				_cmee_stats = True
+			_CMEE_STATUS = (data.decode().split()[-1])
+			if "OK" in _CMEE_STATUS:
+				_CMEE_STATUS = True
 		except:
-			_cmee_stats = False
-		return _cmee_stats
+			_CMEE_STATUS = False
+		return _CMEE_STATUS
 
 	def get_simpin(self):
 		cmd = ("AT+CPIN?")
@@ -160,13 +157,13 @@ class Class_Tools(Class_Communicate):
 			# simostats = data.decode()
 			# simostats = simostats.split(":")[1]
 			# simostats = simostats.split()[0]
-			_getsim_stats = (data.decode().split(":")[1].split()[0])
-			if "READY" in _getsim_stats:
-				_getsim_stats = True
+			_GETSIM_STATUS = (data.decode().split(":")[1].split()[0])
+			if "READY" in _GETSIM_STATUS:
+				_GETSIM_STATUS = True
 		except:
-			_getsim_stats = False
+			_GETSIM_STATUS = False
 			
-		return _getsim_stats
+		return _GETSIM_STATUS
 
 	def set_simpin(self, newpin):
 		cmd = ("AT+CPIN={}".format(newpin))
@@ -179,10 +176,88 @@ class Class_Tools(Class_Communicate):
 			)
 		# data = (data.decode().split()[-1])		
 		try:
-			_setsim_stats = (data.decode().split()[-1])
-			if "OK" in _setsim_stats:
-				_setsim_stats = True
+			_SETSIM_STATUS = (data.decode().split()[-1])
+			if "OK" in _SETSIM_STATUS:
+				_SETSIM_STATUS = True
 		except:
-			_setsim_stats = False
-		return _setsim_stats
+			_SETSIM_STATUS = False
+		return _SETSIM_STATUS
 
+	def get_registration(self):
+		cmd = ("AT+CREG?")
+		data = self._send_cmd(
+			cmd,
+			return_data=True,
+			t=1,
+			printio=True,
+			get_decode_data=False,
+			get_lines_data=False,		#data to lines True/False
+			select_line=False			#extract line False,0,1,2,...
+			)
+		_REG_STATUS = data
+		return _REG_STATUS
+	
+	def get_network(self):
+		cmd = ("AT+CREG?")
+		data = self._send_cmd(
+			cmd,					#command
+			return_data=True,		#return data
+			t=1,					#timeout
+			printio=True,			#print output 
+			get_decode_data=True, 	#decode data ?
+			get_lines_data=True,	#data to lines True/False
+			select_line=1			#extract line False,0,1,2,...
+			)
+		_REG_STATUS = data
+		return _REG_STATUS
+
+
+	def hangup(self):
+		cmd = ("ATH")
+		data = self._send_cmd(
+			cmd,
+			return_data=True,
+			t=1,
+			printio=True,
+			get_decode_data=False
+			)
+		# data = (data.decode().split()[-1])		
+		try:
+			print (self.data_cmd(data))
+		# 	_HANGUP_STATUS = (data.decode().split()[-1])
+		# 	if "OK" in _HANGUP_STATUS:
+		# 		_HANGUP_STATUS = True
+		except:
+			_HANGUP_STATUS = False
+		return _HANGUP_STATUS
+
+	def split_datas(self, sentence):
+		# print ("Data Command Value[0] = ", sentence.decode().split()[0])
+		# print ("Data Order[1] = ", sentence.decode().split()[1])
+		# print ("Data Response[2] = ", sentence.decode().split()[2])
+		# print ("Data Result[3] = ", sentence.decode().split()[3])
+		# print ("Data Result[4] = ", sentence.decode().split()[4])
+		# print ("Data Conf[-1] = ", sentence.decode().split()[-1])
+		sentence = sentence.replace(b"\r\n",b" ")
+		sentence = sentence.replace(b"\r",b"").strip()
+		# sentence = sentence.strip()
+		# sentence=(sentence.decode)
+		
+		return sentence
+""" 	
+    def call(self, number: str) -> str:
+        if self.debug:
+            print("Sending: ATD{};".format(number))
+
+        self.comm.send("ATD{};".format(number))
+        read = self.comm.read_lines()
+
+        # ['ATD491234567890;', 'OK']
+        if self.debug:
+            print("Device responded: ", read)
+
+        if read[-1] != "OK":
+            raise Exception("Command failed")
+        return read[1]
+
+ """
