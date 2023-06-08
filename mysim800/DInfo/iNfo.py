@@ -14,7 +14,7 @@ class Class_Info(Class_Communicate):
         self._simoprator = None
         self._simostats = None
         self._APN = None
-        self._Latitude , self._Longitude = None,None
+        self._Latitude, self._Longitude = None, None
 
     @property
     def APN(self):
@@ -22,11 +22,10 @@ class Class_Info(Class_Communicate):
 
     @property
     def Location(self):
-        return self._Latitude , self._Longitude
-
+        return self._Latitude, self._Longitude
 
     @APN.setter
-    def APN(self,val):
+    def APN(self, val):
         self._APN = val
 
     @property
@@ -86,8 +85,8 @@ class Class_Info(Class_Communicate):
         cmd = "AT+CMEE=2"  # enable the extended error codes to get a verbose format
         self._send_cmd(cmd)
         cmd = "AT+cpin?"
-        data = self._send_cmd(cmd, return_data=True,t=2)
-       
+        data = self._send_cmd(cmd, return_data=True, t=2)
+
         try:
             simostats = data.decode().split(":")[1].split()[0]
         except:
@@ -100,38 +99,40 @@ class Class_Info(Class_Communicate):
         Get the current signal strength in 'bars'
         """
         cmd = "AT+CSQ"
-        data = self._send_cmd(cmd, return_data=True)    
+        data = self._send_cmd(cmd, return_data=True)
         try:
             RSSI = data.decode().split(":")[1].split()[0]
         except:
             RSSI = None
         self._RSSI = RSSI
         print("RSSI->", self._RSSI)
-    
+
     def getLoctions(self):
         self._bearer(self._APN)
         cmd = "AT+CIPGSMLOC=1,1"
-        data = self._send_cmd(cmd, return_data=True)   
+        data = self._send_cmd(cmd, return_data=True)
         cmd = "AT+CIPGSMLOC=2,1"
-        
-        data = self._send_cmd(cmd, return_data=True)   
+
+        data = self._send_cmd(cmd, return_data=True)
         try:
-            
-            self._Latitude , self._Longitude = data.decode().split()[1].split(",")[1] ,data.decode().split()[1].split(",")[2]
+
+            self._Latitude, self._Longitude = data.decode().split()[1].split(
+                ",")[1], data.decode().split()[1].split(",")[2]
         except:
-            self._Latitude , self._Longitude = None,None
+            self._Latitude, self._Longitude = None, None
 
         cmd = "AT +SAPBR=0,1"
         self._send_cmd(cmd)
-        print(self._Latitude , self._Longitude )
-    
+        print(self._Latitude, self._Longitude)
+
     def getCBC(self):
         "battery info"
         cmd = "AT+CBC"
-        data = self._send_cmd(cmd, return_data=True)  
-        battery , voltage =  data.decode().split()[2].split(',')[1] ,data.decode().split()[2].split(',')[2]
-        print(battery,int(voltage)/1000)
-    
+        data = self._send_cmd(cmd, return_data=True)
+        battery, voltage = data.decode().split()[2].split(
+            ',')[1], data.decode().split()[2].split(',')[2]
+        print(battery, int(voltage)/1000)
+
     def all(self):
         self.getCBC()
         self.getLoctions()
@@ -140,4 +141,3 @@ class Class_Info(Class_Communicate):
         self.getIMEI()
         self.getModuleVersion()
         self.getoprator()
-        

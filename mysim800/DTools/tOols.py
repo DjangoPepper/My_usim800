@@ -148,6 +148,10 @@ class Class_Tools(Class_Communicate):
         return _CMEE_STATUS
 
     def get_simpin(self):
+
+        cmd = ("AT+Cmee=2")
+        data = self._send_cmd(cmd)
+
         cmd = ("AT+CPIN?")
         data = self._send_cmd(
             cmd,
@@ -155,14 +159,18 @@ class Class_Tools(Class_Communicate):
             t=2,
             printio=True,
             get_decode_data=False,
-            get_lines_data=False,
-            select_line=False
+            get_lines_data=True,
+            select_line=1
         )
         # data = (data.decode().split()[-1])
         try:
-            _GETSIM_STATUS = (data.decode().split(":")[1].split()[0])
-            if "READY" in _GETSIM_STATUS:
+            # _GETSIM_STATUS = (data.decode().split(":")[1].split()[0])
+            _GETSIM_STATUS = data
+            if _GETSIM_STATUS == "READY":
                 _GETSIM_STATUS = True
+            else:
+                _GETSIM_STATUS = False
+
         except:
             _GETSIM_STATUS = False
 
@@ -176,14 +184,18 @@ class Class_Tools(Class_Communicate):
             t=5,
             printio=True,
             get_decode_data=False
+            get_lines_data=True # a tester apres reboot
+            select_line=1
         )
         # data = (data.decode().split()[-1])
         try:
             _SETSIM_STATUS = (data.decode().split()[-1])
-            if "OK" in _SETSIM_STATUS:
+            if "Ready" in _SETSIM_STATUS:  # coz AT+CPIN=0000 OK +CPIN: READY Call Ready SMS Ready
                 _SETSIM_STATUS = True
+                self.tools.getsimpin()
         except:
             _SETSIM_STATUS = False
+            exit(0)
         return _SETSIM_STATUS
 
     def get_registration(self):  # Initial version of network
