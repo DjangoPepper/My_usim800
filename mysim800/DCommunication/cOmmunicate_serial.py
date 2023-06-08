@@ -27,7 +27,8 @@ class Class_Communicate:
 		v_RCV = self._port.read(14816)
 
 	def _send_cmd(self, cmd, t=1, bytes=14816, return_data=False, 
-				printio=False, get_decode_data=False, read=True, get_lines_data=False, select_line=False):
+				printio=False, get_decode_data=False, read=True, 
+				get_lines_data=False, select_line=False):
 		cmd = self._setcmd(cmd)
 		self._port.write(cmd.encode())
 		if read:
@@ -44,7 +45,8 @@ class Class_Communicate:
 				if not get_decode_data:
 					v_RCV = self._port.read(bytes)
 				else:
-					v_RCV = None
+					# v_RCV = None
+					v_RCV = (v_RCV.decode())
 
 			if printio:
 				try :
